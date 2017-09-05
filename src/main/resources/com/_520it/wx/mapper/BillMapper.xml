@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com._520it.wx.mapper.BillMapper">
+    <resultMap id="BaseResultMap" type="com._520it.wx.domain.Bill">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="saleDate" property="saleDate" jdbcType="DATE"/>
+        <result column="costPrice" property="costPrice" jdbcType="DECIMAL"/>
+        <result column="totalPrice" property="totalPrice" jdbcType="DECIMAL"/>
+        <result column="totalNumber" property="totalNumber"/>
+        <result column="comment" property="comment"/>
+        <association column="client_id" property="client"
+                     javaType="com._520it.wx.domain.Client" columnPrefix="c_">
+            <result property="id" column="id"/>
+            <result property="name" column="name"/>
+            <result property="openId" column="openId"/>
+        </association>
+        <collection property="items" column="id" ofType="com._520it.wx.domain.BillItem"
+                    select="com._520it.wx.mapper.BillItemMapper.selectByBillId">
+        </collection>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from bill
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com._520it.wx.domain.Bill" useGeneratedKeys="true" keyProperty="id">
+    insert into bill (sn, saleDate, costPrice, 
+      totalPrice, totalNumber,comment, client_id
+      )
+    values (#{sn,jdbcType=VARCHAR}, #{saleDate,jdbcType=DATE}, #{costPrice}, 
+      #{totalPrice}, #{totalNumber},#{comment}, #{client.id,jdbcType=BIGINT}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.Bill">
+    update bill
+    set sn = #{sn,jdbcType=VARCHAR},
+      saleDate = #{saleDate,jdbcType=DATE},
+      costPrice = #{costPrice},
+      totalPrice = #{totalPrice},
+      totalNumber = #{totalNumber},
+      comment = #{comment},
+      client_id = #{client.id,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <sql id="base_column">
+       bill.id, bill.saleDate,bill.costPrice,bill.totalPrice, bill.sn,bill.totalNumber,
+       c.id c_id, c.name c_name, c.openId c_openId
+  </sql>
+    <sql id="base_table">
+       bill 
+       LEFT JOIN client c ON c.id=bill.client_id
+  </sql>
+    <sql id="base_where">
+
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="base_column"/>
+        from
+        <include refid="base_table"/>
+        where bill.id = #{id}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="base_column"/>
+        from
+        <include refid="base_table"/>
+    </select>
+
+    <select id="getDataList" resultMap="BaseResultMap">
+        select
+        <include refid="base_column"/>
+        from
+        <include refid="base_table"/>
+        <include refid="base_where"/>
+        limit #{start},#{rows}
+    </select>
+    <select id="getTotalCount" resultType="int">
+        select count(*)
+        from
+        <include refid="base_table"/>
+        <include refid="base_where"/>
+    </select>
+
+</mapper>

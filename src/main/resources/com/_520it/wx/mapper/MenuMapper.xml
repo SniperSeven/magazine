@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com._520it.wx.mapper.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com._520it.wx.domain.Menu" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="key" property="key" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="media_id" property="media_id" jdbcType="VARCHAR" />
+    <result column="state" property="state" />
+    <collection property="sub_button" column="id" ofType="com._520it.wx.domain.Menu" select="getsubbuttons" ></collection>
+  </resultMap>
+
+  <resultMap id="ResultMap" type="com._520it.wx.domain.Menu" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="key" property="key" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="media_id" property="media_id" jdbcType="VARCHAR" />
+    <result column="state" property="state" />
+    <association property="parent" javaType="com._520it.wx.domain.Menu" column="parent_id" select="selectByPrimaryKey"></association>
+  </resultMap>
+
+
+  <select id="getbuttons" resultMap="BaseResultMap">
+    select * from menu where parent_id is null
+  </select>
+
+  <select id="getsubbuttons" resultType="com._520it.wx.domain.Menu">
+    select * from menu where parent_id = #{id}
+  </select>
+
+
+ <!-- <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from menu
+    where id = #{id,jdbcType=BIGINT}
+  </delete>-->
+
+<!--  <insert id="insert" parameterType="com._520it.wx.domain.Menu" useGeneratedKeys="true" keyProperty="id" >
+    insert into menu (name, type, key, 
+      url, parent_id, media_id,state
+      )
+    values (#{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{key,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, #{mediaId,jdbcType=VARCHAR},1
+      )
+  </insert>-->
+
+  <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.Menu" >
+    update menu
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      key = #{key,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      media_id = #{mediaId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="disable">
+    update menu
+    set state = 0 where id = #{id}
+  </update>
+
+  <update id="enable">
+    update menu
+    set state = 1 where id = #{id}
+  </update>
+
+  <select id="selectByPrimaryKey" resultType="com._520it.wx.domain.Menu" parameterType="java.lang.Long" >
+    select id, name, type, key, url, parent_id, media_id, state
+    from menu
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <select id="selectAll" resultMap="ResultMap">
+    select id, name, type, key, url, parent_id, media_id,state
+    from menu
+  </select>
+
+
+  <select id="getTotalCount" resultType="int">
+    select count(*) from menu
+  </select>
+
+  <select id="getDataList" resultMap="ResultMap">
+    select * from menu
+    limit #{start},#{rows}
+  </select>
+
+</mapper>

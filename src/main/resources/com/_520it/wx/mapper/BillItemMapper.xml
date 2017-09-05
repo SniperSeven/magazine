@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com._520it.wx.mapper.BillItemMapper">
+    <resultMap id="BaseResultMap" type="com._520it.wx.domain.BillItem">
+        <id column="id" property="id"/>
+        <result column="number" property="number" jdbcType="DECIMAL"/>
+        <result column="smallAccount" property="smallAccount" jdbcType="DECIMAL"/>
+        <result column="bill_id" property="billId"/>
+
+        <association column="product_id" property="product"
+                     javaType="com._520it.wx.domain.Product" columnPrefix="p_">
+            <result column="id" property="id"/>
+            <result property="name" column="name"/>
+        </association>
+
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from billitem
+    where id = #{id}
+  </delete>
+    <insert id="insert" parameterType="com._520it.wx.domain.BillItem" useGeneratedKeys="true" keyProperty="id">
+    insert into billitem (bill_id, product_id, number, 
+      smallAccount)
+    values (#{billId}, #{productId}, #{number,jdbcType=INTEGER}, 
+      #{smallAccount,jdbcType=DECIMAL})
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.BillItem">
+    update billitem
+    set bill_id = #{billId},
+      product_id = #{productId},
+      number = #{number,jdbcType=INTEGER},
+      smallAccount = #{smallAccount,jdbcType=DECIMAL}
+    where id = #{id}
+  </update>
+    <sql id="base_column">
+      item.id,item.number,item.smallAccount,item.product_id,
+      p.id p_id,p.name p_name
+  </sql>
+    <sql id="base_table">
+      billitem item
+      LEFT JOIN product p ON item.product_id=p.id
+  </sql>
+    <sql id="base_where">
+
+    </sql>
+
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="base_column"/>
+        from
+        <include refid="base_table"/>
+        where item.id = #{id}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="base_column"/>
+        from
+        <include refid="base_table"/>
+    </select>
+    <select id="getDataList" resultMap="BaseResultMap">
+        select
+        <include refid="base_column"/>
+        from
+        <include refid="base_table"/>
+        <include refid="base_where"/>
+        limit #{start},#{rows}
+    </select>
+    <select id="getTotalCount" resultType="int">
+        select count(*)
+        from
+        <include refid="base_table"/>
+        <include refid="base_where"/>
+    </select>
+    <select id="selectByBillId" resultType="com._520it.wx.domain.BillItem">
+        select
+        <include refid="base_column"/>
+        from
+        <include refid="base_table"/>
+        WHERE item.bill_id=#{id}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com._520it.wx.mapper.SalechartMapper">
+    <resultMap id="BaseResultMap" type="com._520it.wx.domain.Salechart">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="sn" property="sn" jdbcType="VARCHAR"/>
+        <result column="number" property="number" jdbcType="DECIMAL"/>
+        <result column="costPrice" property="costprice" jdbcType="DECIMAL"/>
+        <result column="salePrice" property="saleprice" jdbcType="DECIMAL"/>
+        <result column="profit" property="profit" jdbcType="DECIMAL"/>
+        <result column="saleTime" property="saletime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <!--<delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+      delete from salechart
+      where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.Salechart" >
+      update salechart
+      set sn = #{sn,jdbcType=VARCHAR},
+        number = #{number,jdbcType=INTEGER},
+        costPrice = #{costprice,jdbcType=DECIMAL},
+        salePrice = #{saleprice,jdbcType=DECIMAL},
+        profit = #{profit,jdbcType=DECIMAL},
+        saleTime = #{saletime,jdbcType=TIMESTAMP}
+      where id = #{id,jdbcType=BIGINT}
+    </update>-->
+    <insert id="insert" parameterType="com._520it.wx.domain.Salechart" useGeneratedKeys="true" keyProperty="id" >
+      insert into salechart (sn, number, costPrice,
+        salePrice, profit, saleTime
+        )
+      values (#{sn,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{costprice,jdbcType=DECIMAL},
+        #{saleprice,jdbcType=DECIMAL}, #{profit,jdbcType=DECIMAL}, #{saletime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select id, sn, number, costPrice, salePrice, profit, saleTime
+    from salechart
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, sn, number, costPrice, salePrice, profit, saleTime
+    from salechart
+  </select>
+    <sql id="where_sql">
+        <where>
+            <if test="maxValue!=null">
+                and profit &lt; #{maxValue}
+            </if>
+            <if test="minValue!=null">
+                and profit &gt; #{minValue}
+            </if>
+            <if test="keyword!=null and keyword!=''">
+                and sn like concat('%',#{keyword},'%')
+            </if>
+        </where>
+    </sql>
+    <select id="getTotalCount" resultType="java.lang.Integer">
+    select count(*) from salechart
+    <include refid="where_sql"/>
+  </select>
+    <select id="getListData" resultMap="BaseResultMap">
+    select * from salechart
+    <include refid="where_sql"/>
+    limit #{start},#{rows}
+  </select>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com._520it.wx.mapper.ClientMapper">
+    <resultMap id="BaseResultMap" type="com._520it.wx.domain.Client">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="openId" property="openId" jdbcType="VARCHAR"/>
+        <result column="tel" property="tel" jdbcType="VARCHAR"/>
+        <result column="concernTime" property="concernTime" jdbcType="TIMESTAMP"/>
+        <result column="cancelConcernTime" property="cancelConcernTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="BIT"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from client
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com._520it.wx.domain.Client" useGeneratedKeys="true" keyProperty="id">
+    insert into client (name, address, openId, 
+      tel, concernTime, cancelConcernTime, 
+      status)
+    values (#{name,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{openId,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{concernTime,jdbcType=TIMESTAMP}, #{cancelConcernTime,jdbcType=TIMESTAMP}, 
+     1)
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.Client">
+    update client
+    set name = #{name,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      openId = #{openId,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      concernTime = #{concernTime,jdbcType=TIMESTAMP},
+      cancelConcernTime = #{cancelConcernTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select id, name, address, openId, tel, concernTime, cancelConcernTime, status
+    from client
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, address, openId, tel, concernTime, cancelConcernTime, status
+    from client
+  </select>
+
+    <select id="getDataList" resultMap="BaseResultMap">
+        select id, name, address, openId, tel, concernTime, cancelConcernTime, status
+        from client
+        <include refid="base_where"/>
+        limit #{start},#{rows}
+    </select>
+    <select id="getTotalCount" resultType="int">
+        select count(*)
+        from client
+        <include refid="base_where"/>
+    </select>
+    <sql id="base_where">
+        <where>
+            <if test="endConcernTime!=null">
+                and concernTime &lt; #{endConcernTime}
+            </if>
+            <if test="beginConcernTime!=null">
+                and concernTime &gt; #{beginConcernTime}
+            </if>
+            <if test="status!=null and status!=-1">
+                and status=#{status}
+            </if>
+        </where>
+    </sql>
+</mapper>
