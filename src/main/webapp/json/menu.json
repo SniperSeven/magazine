@@ -1,0 +1,31 @@
+[
+	{
+	  "id":1,
+	  "text":"用户信息管理",
+	  "attributes":{
+	    "url":"/client_view.do"
+	  }
+	
+	},
+	{
+	  "id":2,
+	  "text":"消息记录管理",
+	  "attributes":{
+	 	 "url":"/message_view.do"
+	  }
+	},
+	{
+		"id":3,
+		"text":"销售记录管理",
+		"attributes":{
+			"url":"/saleChart_view.do"
+		}
+	},
+	{
+		"id":4,
+		"text":"商品管理",
+		"attributes":{
+			"url":"/product_view.do"
+		}
+	}
+]
