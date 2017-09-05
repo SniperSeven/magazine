@@ -20,7 +20,7 @@ public class Message {
 
     private String replycontent;
 
-    private Integer type;
+    private String type;
     @JsonFormat(pattern = "yy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yy-MM-dd HH:mm:ss")
     private Date inputtime;

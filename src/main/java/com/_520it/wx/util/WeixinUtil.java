@@ -32,6 +32,10 @@ public class WeixinUtil {
 
     public static final String GET_TULING_URL = "http://www.tuling123.com/openapi/api?info=INFO&key=0a16adc7f0b7429886038162f881bca3";
 
+    public static final String ADD_NEWS_URL = "https://api.weixin.qq.com/cgi-bin/material/add_news?access_token=ACCESS_TOKEN";
+
+    public static final String ADD_IMAGE = "";
+
     public static String getAccessToken(){
         if(new Date().getTime() > expiresTime){
             String s = HttpUtil.get(GET_ACCESSTOKEN_URL.replace("APPID", APPID).replace("APPSECRET", APPSECRET));

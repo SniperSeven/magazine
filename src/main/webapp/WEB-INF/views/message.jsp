@@ -24,12 +24,14 @@
 <body>
 <table id="message_datagrid"></table>
 <div id="message_tb">
-    用户:<input type="text" name="name">录入时间<input type="text" name="beginTime" class="easyui-datebox"/>--><input
+    用户:<input type="text" name="name">消息时间<input type="text" name="beginTime" class="easyui-datebox"/>--><input
         type="text" name="endTime" class="easyui-datebox"/><a class="easyui-linkbutton"
                                         data-options="iconCls:'icon-reload',plain:true"
                                         data-cmd="searchContent">查询</a>
     <a class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true"
-       data-cmd="rload">刷新</a>
+       data-cmd="reload">刷新</a>
+</div>
+
 </body>
 </html>
 

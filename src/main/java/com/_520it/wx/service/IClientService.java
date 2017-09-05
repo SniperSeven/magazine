@@ -21,4 +21,6 @@ public interface IClientService {
 	int updateByPrimaryKey(Client record);
 
 	PageResult pageQuery(ClientQueryObject qo);
+
+    Client selectByOpenid(String openid);
 }

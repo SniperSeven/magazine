@@ -19,4 +19,6 @@ public interface ClientMapper {
 	List<Client> getDataList(ClientQueryObject qo);
 
 	int getTotalCount(ClientQueryObject qo);
+
+    Client selectByOpenid(String openid);
 }

@@ -13,11 +13,8 @@ public class LotteryController {
 
     @RequestMapping("/lottery")
     public String lottery(HttpServletRequest req,String present){
-
         System.out.println("奖品: "+present);
         req.setAttribute("username","丁某");
-
-
         return "lottery";
     }
 

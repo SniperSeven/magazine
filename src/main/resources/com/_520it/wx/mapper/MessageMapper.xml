@@ -5,7 +5,7 @@
         <id column="id" property="id" jdbcType="BIGINT"/>
         <result column="receiveContent" property="receivecontent" jdbcType="VARCHAR"/>
         <result column="replyContent" property="replycontent" jdbcType="VARCHAR"/>
-        <result column="type" property="type" jdbcType="INTEGER"/>
+        <result column="type" property="type"/>
         <result column="inputTime" property="inputtime" jdbcType="TIMESTAMP"/>
         <association property="client" column="client" columnPrefix="client_" javaType="com._520it.wx.domain.Client"
                      select="com._520it.wx.mapper.ClientMapper.selectByPrimaryKey">
@@ -19,21 +19,21 @@
   </delete>
     <insert id="insert" parameterType="com._520it.wx.domain.Message" useGeneratedKeys="true" keyProperty="id">
     insert into message (client_id, receiveContent, replyContent,type, inputTime)
-    values (#{client.id,jdbcType=BIGINT}, #{receivecontent,jdbcType=VARCHAR}, #{replycontent,jdbcType=VARCHAR},#{type,jdbcType=INTEGER}, #{inputtime,jdbcType=TIMESTAMP})
+    values (#{client.id,jdbcType=BIGINT}, #{receivecontent,jdbcType=VARCHAR}, #{replycontent,jdbcType=VARCHAR},#{type}, #{inputtime,jdbcType=TIMESTAMP})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.Message">
     update message
     set client_id = #{client.id,jdbcType=BIGINT},
       receiveContent = #{receivecontent,jdbcType=VARCHAR},
       replyContent = #{replycontent,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
+      type = #{type},
       inputTime = #{inputtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
     select id, client_id, receiveContent, replyContent, type, inputTime
     from message
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </select>
     <select id="selectAll" resultMap="BaseResultMap">
     select id, client_id, receiveContent, replyContent, type, inputTime

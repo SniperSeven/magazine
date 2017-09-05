@@ -29,7 +29,7 @@ $(function () {
             {field: "receivecontent", title: "接收内容", width: 100},
             {field: "replycontent", title: "回复内容", width: 100},
             {field: "type", title: "消息类型", width: 100},
-            {field: "inputtime", title: "当前系统时间", width: 100}
+            {field: "inputtime", title: "消息记录时间", width: 100}
         ]],
         toolbar: "#message_tb"
     });
@@ -44,7 +44,7 @@ $(function () {
                 endTime:endTime
             })
         },
-        rload: function () {
+        reload: function () {
             $("[name='name']").val("");
             $("[name='beginTime']").val("");
             $("[name='endTime']").val("");

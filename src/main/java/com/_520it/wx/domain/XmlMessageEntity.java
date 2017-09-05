@@ -19,6 +19,7 @@ public class XmlMessageEntity {
 	private String Content;
 	private String Event;
 	private Long MsgId;
+	private String Url;
 
 	@Override
 	public String toString() {

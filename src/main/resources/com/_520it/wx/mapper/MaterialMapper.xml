@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com._520it.wx.mapper.MaterialMapper" >
+  <resultMap id="BaseResultMap" type="com._520it.wx.domain.Material" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="thumb_media_id" property="thumb_media_id" jdbcType="VARCHAR" />
+    <result column="author" property="author" jdbcType="VARCHAR" />
+    <result column="digest" property="digest" jdbcType="VARCHAR" />
+    <result column="show_cover_pic" property="show_cover_pic" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="content_source_url" property="content_source_url" jdbcType="VARCHAR" />
+    <association property="product" column="product_id" javaType="com._520it.wx.domain.Product" select="com._520it.wx.mapper.ProductMapper.selectByPrimaryKey"></association>
+  </resultMap>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from material
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  
+  <insert id="insert" parameterType="com._520it.wx.domain.Material" useGeneratedKeys="true" keyProperty="id" >
+    insert into material (title, thumb_media_id, author, 
+      digest, show_cover_pic, content, 
+      content_source_url,product_id)
+    values (#{title,jdbcType=VARCHAR}, #{thumb_media_id,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{digest,jdbcType=VARCHAR}, #{show_cover_pic}, #{content,jdbcType=VARCHAR}, 
+      #{content_source_url,jdbcType=VARCHAR},#{product.id})
+  </insert>
+  
+  <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.Material" >
+    update material
+    set title = #{title,jdbcType=VARCHAR},
+      thumb_media_id = #{thumb_media_id,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      digest = #{digest,jdbcType=VARCHAR},
+      show_cover_pic = #{show_cover_pic},
+      content = #{content,jdbcType=VARCHAR},
+      content_source_url = #{content_source_url,jdbcType=VARCHAR},
+      product_id = #{product.id}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, title, thumb_media_id, author, digest, show_cover_pic, content, content_source_url,product_id
+    from material
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, title, thumb_media_id, author, digest, show_cover_pic, content, content_source_url,product_id
+    from material
+  </select>
+
+  <select id="getTotalCount" resultType="java.lang.Integer">
+    select count(*) from material
+  </select>
+
+  <select id="getDataList" resultMap="BaseResultMap">
+    select * from material
+    limit #{start},#{rows}
+  </select>
+  
+</mapper>
