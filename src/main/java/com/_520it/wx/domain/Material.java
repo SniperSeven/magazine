@@ -3,6 +3,7 @@ package com._520it.wx.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 
@@ -18,7 +19,7 @@ public class Material {
 
     private String digest;
 
-    private String show_cover_pic;
+    private Boolean show_cover_pic;
 
     private String content;
 
@@ -27,4 +28,22 @@ public class Material {
     private Product product;
 
     private BigDecimal salePrice;
+
+    private String mediaId;
+
+    @Override
+    public String toString() {
+        return "Material{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", thumb_media_id='" + thumb_media_id + '\'' +
+                ", author='" + author + '\'' +
+                ", digest='" + digest + '\'' +
+                ", show_cover_pic=" + show_cover_pic +
+                ", content_source_url='" + content_source_url + '\'' +
+                ", product=" + product +
+                ", salePrice=" + salePrice +
+                ", mediaId='" + mediaId + '\'' +
+                '}';
+    }
 }

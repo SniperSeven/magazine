@@ -16,6 +16,8 @@ public interface IMenuService {
 
     Menu selectByPrimaryKey(Long id);
 
+    Menu selectByName(String name);
+
     List<Menu> selectAll();
 
     int updateByPrimaryKey(Menu menu);

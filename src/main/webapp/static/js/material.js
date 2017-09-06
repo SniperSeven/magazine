@@ -73,9 +73,32 @@ $(function () {
             });
         },
 
-        apply:function () {
-
+        cancel : function () {
+            $("#material_dialog").dialog("close");
         },
+
+        apply:function () {
+            var row = $("#material_datagrid").datagrid("getSelected");
+            if (!row.id) {
+                $.messager.alert("温馨提示", "请选择要应用的特价商品", "info");
+                return;
+            } else {
+                $.messager.confirm("温馨提示", "确定要应用该特价商品吗", function (r) {
+                    if (r) {
+                        $.post("/material_apply.do", {id: row.id}, function (data) {
+                            if (data.success) {
+                                $.messager.alert("温馨提示", data.msg, "info", function () {
+                                    $("#material_datagrid").datagrid("reload");
+                                });
+                            } else {
+                                $.messager.alert("温馨提示", data.msg, "info");
+                            }
+                        });
+                    }
+                });
+            }
+        },
+
         rload: function () {
            $("#material_datagrid").datagrid("load",{})
         },

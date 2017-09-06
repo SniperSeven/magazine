@@ -1,9 +1,10 @@
 package com._520it.wx.util;
 
+import com._520it.wx.domain.Material;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
-import java.util.Date;
+import java.util.*;
 
 public class WeixinUtil {
 
@@ -34,7 +35,8 @@ public class WeixinUtil {
 
     public static final String ADD_NEWS_URL = "https://api.weixin.qq.com/cgi-bin/material/add_news?access_token=ACCESS_TOKEN";
 
-    public static final String ADD_IMAGE = "";
+    public static final String GET_SUCAI_URL = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=ACCESS_TOKEN";
+
 
     public static String getAccessToken(){
         if(new Date().getTime() > expiresTime){
@@ -73,8 +75,13 @@ public class WeixinUtil {
     }
 
     public static void main(String[] args){
-       String access_token = HttpUtil.get(GET_TICKET_URL.replace("ACCESS_TOKEN", getAccessToken()));
-       System.out.println(access_token);
+       /* String result = HttpUtil.post(GET_SUCAI_URL.replace("ACCESS_TOKEN", getAccessToken()), "{\n" +
+                "   \"type\":\"image\",\n" +
+                "   \"offset\":1,\n" +
+                "   \"count\":1\n" +
+                "}");
+        System.out.println(result);*/
+
     }
 
 }

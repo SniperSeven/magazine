@@ -12,6 +12,8 @@ public interface MenuMapper {
 
     Menu selectByPrimaryKey(Long id);
 
+    Menu selectByName(String name);
+
     List<Menu> selectAll();
 
     int updateByPrimaryKey(Menu menu);
@@ -27,5 +29,6 @@ public interface MenuMapper {
     void disable(Long id);
 
     void enable(Long id);
+
 
 }

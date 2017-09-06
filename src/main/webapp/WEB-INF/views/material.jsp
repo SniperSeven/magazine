@@ -30,8 +30,6 @@
             <tr>
                 <td align="right">标题:</td>
                 <td><input type="text" name="title"/></td>
-                <td><input class="easyui-combobox" name="id"
-                           data-options="valueField:'id',textField:'username',url:'/student_listAll.do'"/></td>
             </tr>
             <tr style="height: 10px">
                 <td align="right">产品:</td>
@@ -51,7 +49,10 @@
                     </select>
                 </td>
             </tr>
-
+            <tr>
+                <td align="right">优惠价:</td>
+                <td><input type="text" name="salePrice"/></td>
+            </tr>
             <tr>
                 <td align="right">原文地址:</td>
                 <td><input type="text" name="content_source_url"/></td>

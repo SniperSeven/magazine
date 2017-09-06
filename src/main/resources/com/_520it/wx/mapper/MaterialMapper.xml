@@ -9,6 +9,7 @@
     <result column="digest" property="digest" jdbcType="VARCHAR" />
     <result column="show_cover_pic" property="show_cover_pic" />
     <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="mediaId" property="mediaId" jdbcType="VARCHAR" />
     <result column="content_source_url" property="content_source_url" jdbcType="VARCHAR" />
     <association property="product" column="product_id" javaType="com._520it.wx.domain.Product" select="com._520it.wx.mapper.ProductMapper.selectByPrimaryKey"></association>
   </resultMap>
@@ -21,10 +22,10 @@
   <insert id="insert" parameterType="com._520it.wx.domain.Material" useGeneratedKeys="true" keyProperty="id" >
     insert into material (title, thumb_media_id, author, 
       digest, show_cover_pic, content, 
-      content_source_url,product_id)
+      content_source_url,product_id,mediaId)
     values (#{title,jdbcType=VARCHAR}, #{thumb_media_id,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
       #{digest,jdbcType=VARCHAR}, #{show_cover_pic}, #{content,jdbcType=VARCHAR}, 
-      #{content_source_url,jdbcType=VARCHAR},#{product.id})
+      #{content_source_url,jdbcType=VARCHAR},#{product.id},#{mediaId})
   </insert>
   
   <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.Material" >
@@ -36,7 +37,8 @@
       show_cover_pic = #{show_cover_pic},
       content = #{content,jdbcType=VARCHAR},
       content_source_url = #{content_source_url,jdbcType=VARCHAR},
-      product_id = #{product.id}
+      product_id = #{product.id},
+      mediaId = #{mediaId}
     where id = #{id,jdbcType=BIGINT}
   </update>
   

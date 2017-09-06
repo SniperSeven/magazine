@@ -74,6 +74,12 @@
     where id = #{id,jdbcType=BIGINT}
   </select>
 
+  <select id="selectByName" resultType="com._520it.wx.domain.Menu" >
+    select id, name, type, key, url, parent_id, media_id, state
+    from menu
+    where name = #{name}
+  </select>
+
   <select id="selectAll" resultMap="ResultMap">
     select id, name, type, key, url, parent_id, media_id,state
     from menu

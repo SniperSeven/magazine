@@ -88,7 +88,8 @@ public class IndexController {
             String s = HttpUtil.get(WeixinUtil.GET_TULING_URL.replace("INFO",entity.getContent()));
             System.out.println(s);
             JSONObject json = JSON.parseObject(s);
-            newEntity.setContent((String) json.get("text"));
+            newEntity.setContent("http://zhou.natapp1.cc/offer.html");
+            /*newEntity.setContent((String) json.get("text"));*/
             Message message = new Message();
             message.setClient(client);
             message.setInputtime(new Date());
