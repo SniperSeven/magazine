@@ -91,5 +91,11 @@ public class BillServiceImpl implements IBillService {
 		return new PageResult(totalCount, listData);
 	}
 
+	@Override
+	public int delivery(Long id) {
+
+		return mapper.delivery(id);
+	}
+
 
 }

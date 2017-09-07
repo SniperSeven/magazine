@@ -22,4 +22,6 @@ public interface IBillService {
 	int updateByPrimaryKey(Bill record);
 
 	PageResult pageQuery(BillQueryObject qo);
+
+	int delivery(Long id);
 }

@@ -21,19 +21,19 @@
     <insert id="insert" parameterType="com._520it.wx.domain.BillItem" useGeneratedKeys="true" keyProperty="id">
     insert into billitem (bill_id, product_id, number, 
       smallAccount)
-    values (#{billId}, #{productId}, #{number,jdbcType=INTEGER}, 
+    values (#{billId}, #{product.id}, #{number,jdbcType=INTEGER}, 
       #{smallAccount,jdbcType=DECIMAL})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.BillItem">
     update billitem
     set bill_id = #{billId},
-      product_id = #{productId},
+      product_id = #{product.id},
       number = #{number,jdbcType=INTEGER},
       smallAccount = #{smallAccount,jdbcType=DECIMAL}
     where id = #{id}
   </update>
     <sql id="base_column">
-      item.id,item.number,item.smallAccount,item.product_id,
+      item.id,item.number,item.smallAccount,item.product_id,item.bill_id,
       p.id p_id,p.name p_name
   </sql>
     <sql id="base_table">
@@ -72,7 +72,7 @@
         <include refid="base_table"/>
         <include refid="base_where"/>
     </select>
-    <select id="selectByBillId" resultType="com._520it.wx.domain.BillItem">
+    <select id="selectByBillId" resultMap="BaseResultMap">
         select
         <include refid="base_column"/>
         from

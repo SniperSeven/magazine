@@ -22,4 +22,6 @@ public interface IBillItemService {
 	int updateByPrimaryKey(BillItem record);
 
 	PageResult pageQuery(BillItemQueryObject qo);
+
+	List<BillItem> selectByBillId(Long id);
 }
