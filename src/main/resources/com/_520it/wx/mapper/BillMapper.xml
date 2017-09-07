@@ -8,6 +8,7 @@
         <result column="costPrice" property="costPrice" jdbcType="DECIMAL"/>
         <result column="totalPrice" property="totalPrice" jdbcType="DECIMAL"/>
         <result column="totalNumber" property="totalNumber"/>
+        <result column="comment" property="comment"/>
         <result column="state" property="state"/>
         <association column="client_id" property="client"
                      javaType="com._520it.wx.domain.Client" columnPrefix="c_">
@@ -25,10 +26,10 @@
   </delete>
     <insert id="insert" parameterType="com._520it.wx.domain.Bill" useGeneratedKeys="true" keyProperty="id">
     insert into bill (sn, saleDate, costPrice, 
-      totalPrice, totalNumber, client_id,state
+      totalPrice, totalNumber,comment,state, client_id
       )
     values (#{sn,jdbcType=VARCHAR}, #{saleDate,jdbcType=DATE}, #{costPrice}, 
-      #{totalPrice}, #{totalNumber}, #{client.id,jdbcType=BIGINT},#{state}
+      #{totalPrice}, #{totalNumber},#{comment}, #{state},#{client.id,jdbcType=BIGINT}
       )
   </insert>
     <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.Bill">
@@ -38,21 +39,32 @@
       costPrice = #{costPrice},
       totalPrice = #{totalPrice},
       totalNumber = #{totalNumber},
+      comment = #{comment},
       state = #{state},
       client_id = #{client.id,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
     <sql id="base_column">
-       bill.id, bill.saleDate,bill.costPrice,bill.totalPrice, bill.sn,bill.totalNumber,
-       c.id c_id, c.name c_name, c.openId c_openId,state
+       bill.id, bill.saleDate,bill.costPrice,bill.totalPrice, bill.sn,bill.totalNumber,bill.state,
+       c.id c_id, c.name c_name, c.openId c_openId
   </sql>
     <sql id="base_table">
        bill 
        LEFT JOIN client c ON c.id=bill.client_id
   </sql>
     <sql id="base_where">
-
+        <where>
+            <if test="beginSaleDate!=null">
+                and saleDate &gt;= #{beginSaleDate}
+            </if>
+            <if test="endSaleDate!=null">
+                and saleDate &lt;= #{endSaleDate}
+            </if>
+            <if test="state !=''">
+                and state=#{state}
+            </if>
+        </where>
     </sql>
 
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
@@ -83,12 +95,10 @@
         <include refid="base_table"/>
         <include refid="base_where"/>
     </select>
-    <select id="selectUnsuccessByCLientId" resultMap="BaseResultMap">
-        select
-        <include refid="base_column"/>
-        from
-        <include refid="base_table"/>
-        where client_id=#{id} and state='待付款'
-    </select>
 
+    <update id="delivery">
+        update bill
+        set state="已发货"
+        where id=#{id}
+    </update>
 </mapper>

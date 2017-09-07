@@ -24,10 +24,10 @@
 </div>
 <div style="margin:10px 0;"></div>
 <div id="cc" data-options="fit:true,border:false" class="easyui-layout">
-    <div data-options="border:false,region:'north'" style="height:70px;background:url('../../image/banner-pic.gif') no-repeat;background-size:cover">
+    <div data-options="border:false,region:'north'" style="height:70px;background:url('/static/image/banner-pic.gif') no-repeat;background-size:cover">
         <center><h1>心点芯管理系统</h1></center>
     </div>
-    <div data-options="region:'south',split:true" style="height:30px;background: url('../../image/banner-pic.gif') no-repeat;background-size:cover">
+    <div data-options="region:'south',split:true" style="height:30px;background: url('/static/image/banner-pic.gif') no-repeat;background-size:cover">
         <center>版权所有:广州心点芯糕点有限公司</center>
     </div>
     <div data-options="region:'west',border:false,split:true,headerCls:'border_right_none',bodyCls:'border_right_none'" title="系统菜单" style="width:100px;">

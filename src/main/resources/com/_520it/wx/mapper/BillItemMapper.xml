@@ -3,7 +3,7 @@
 <mapper namespace="com._520it.wx.mapper.BillItemMapper">
     <resultMap id="BaseResultMap" type="com._520it.wx.domain.BillItem">
         <id column="id" property="id"/>
-        <result column="number" property="number" jdbcType="INTEGER"/>
+        <result column="number" property="number" jdbcType="DECIMAL"/>
         <result column="smallAccount" property="smallAccount" jdbcType="DECIMAL"/>
         <result column="bill_id" property="billId"/>
 
@@ -11,9 +11,6 @@
                      javaType="com._520it.wx.domain.Product" columnPrefix="p_">
             <result column="id" property="id"/>
             <result property="name" column="name"/>
-            <result property="imageURL" column="imageURL"/>
-            <result property="introduce" column="introduce"/>
-            <result property="salePrice" column="salePrice"/>
         </association>
 
     </resultMap>
@@ -37,7 +34,7 @@
   </update>
     <sql id="base_column">
       item.id,item.number,item.smallAccount,item.product_id,item.bill_id,
-      p.id p_id,p.name p_name,p.imageURL p_imageURL,p.introduce p_introduce,p.salePrice p_salePrice
+      p.id p_id,p.name p_name
   </sql>
     <sql id="base_table">
       billitem item

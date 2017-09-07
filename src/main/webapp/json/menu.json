@@ -27,5 +27,26 @@
 		"attributes":{
 			"url":"/product_view.do"
 		}
+	},
+	{
+		"id":5,
+		"text":"素材管理",
+		"attributes":{
+			"url":"/material_view.do"
+		}
+	},
+	{
+		"id":6,
+		"text":"菜单管理",
+		"attributes":{
+			"url":"/menu_view.do"
+		}
+	},
+	{
+		"id":7,
+		"text":"订单管理",
+		"attributes":{
+			"url":"/bill_view.do"
+		}
 	}
 ]

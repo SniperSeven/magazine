@@ -23,4 +23,5 @@ public interface IClientService {
 	PageResult pageQuery(ClientQueryObject qo);
 
     Client selectByOpenid(String openid);
+
 }

@@ -21,4 +21,5 @@ public interface ClientMapper {
 	int getTotalCount(ClientQueryObject qo);
 
     Client selectByOpenid(String openid);
+
 }

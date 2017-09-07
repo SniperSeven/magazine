@@ -44,10 +44,10 @@ public class BillController extends BaseController {
 	public AjaxResult save(Bill r) {
 		try {
 			service.insert(r);
-			return new AjaxResult(true, "订单明细保存成功");
+			return new AjaxResult(true, "订单保存成功");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new AjaxResult(false, "订单明细保存失败");
+			return new AjaxResult(false, "订单保存失败");
 		}
 	}
 
@@ -56,10 +56,10 @@ public class BillController extends BaseController {
 	public AjaxResult del(Long id) {
 		try {
 			service.deleteByPrimaryKey(id);
-			return new AjaxResult(true, "订单明细删除成功");
+			return new AjaxResult(true, "订单删除成功");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new AjaxResult(false, "订单明细删除失败");
+			return new AjaxResult(false, "订单删除失败");
 		}
 	}
 
@@ -68,10 +68,22 @@ public class BillController extends BaseController {
 	public AjaxResult edit(Bill bill) {
 		try {
 			service.updateByPrimaryKey(bill);
-			return new AjaxResult(true, "订单明细编辑成功");
+			return new AjaxResult(true, "订单编辑成功");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new AjaxResult(false, "订单明细编辑失败");
+			return new AjaxResult(false, "订单编辑失败");
+		}
+	}
+
+	@RequestMapping("/bill_delivery")
+	@ResponseBody
+	public AjaxResult delivery(Long id) {
+		try {
+			service.delivery(id);
+			return new AjaxResult(true, "订单发货成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new AjaxResult(false, "订单发货失败");
 		}
 	}
 }

@@ -22,5 +22,5 @@ public interface BillMapper {
 
     int getTotalCount(BillQueryObject qo);
 
-    Bill selectUnsuccessByCLientId(Long id);
+    int delivery(Long id);
 }

@@ -22,12 +22,22 @@
     </style>
 </head>
 <body>
+
+<div id="mass_dialog">
+    <form action="" method="post" id="editForm">
+        请输入素材ID:<input id="media_id" type="text" name="media_id">
+    </form>
+</div>
+<div id="masstext_dialog">
+    <form action="" method="post" id="teditForm">
+        请输入文本:<input id="content" type="text" name="content">
+    </form>
+</div>
 <table id="client_datagrid"></table>
 <div id="client_tb">
-    <a class="easyui-linkbutton" data-options="iconCls:'icon-add',plain:true" data-cmd="add">新增</a>
     状态:
     <select id="ss" class="easyui-combobox" name="status" data-options="width:110,panelHeight:'auto'">
-        <option value="-1">全部</option>
+        <option value="">全部</option>
         <option value="1">已关注</option>
         <option value="0">取消关注</option>
     </select>
@@ -35,10 +45,19 @@
         type="text" name="endConcernTime" class="easyui-datebox"/><a class="easyui-linkbutton"
                                               data-options="iconCls:'icon-search',plain:true"
                                               data-cmd="searchContent">查询</a>
-    <a id="clienttrack_search" class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true"
-       data-cmd="showme">查看</a>
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true"
+       data-cmd="massMessage">群发图文消息</a>
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-search',plain:true"
+       data-cmd="massTextMessage">群发文本消息</a>
     <a class="easyui-linkbutton" data-options="iconCls:'icon-reload',plain:true"
        data-cmd="rload">刷新</a>
+</div>
+<div id="mass_bt">
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" data-cmd="save">确认</a>
+</div>
+<div id="masstext_bt">
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" data-cmd="tsave">确认</a>
+</div>
 </body>
 </html>
 

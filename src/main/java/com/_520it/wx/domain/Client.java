@@ -32,4 +32,6 @@ public class Client {
 
     private Boolean status;
 
+    private String url;
+
 }

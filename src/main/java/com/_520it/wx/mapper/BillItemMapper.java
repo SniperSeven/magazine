@@ -21,4 +21,6 @@ public interface BillItemMapper {
 	List<BillItem> getDataList(BillItemQueryObject qo);
 
 	int getTotalCount(BillItemQueryObject qo);
+
+
 }
