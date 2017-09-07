@@ -11,7 +11,6 @@ import com._520it.wx.util.WeixinUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -44,7 +43,7 @@ public class ClientController extends BaseController {
 
     @RequestMapping("/client_mass")
     @ResponseBody
-    public List<String> mass(@RequestParam(value = "openId[]")String[] openId, String mediaId) {
+    public List<String> mass(@RequestParam(value = "openId[]") String[] openId, String mediaId) {
         String mass = "{\n" +
                 "   \"touser\":[\n" +
                 "    OPENID\n" +
@@ -56,13 +55,34 @@ public class ClientController extends BaseController {
                 "    \"send_ignore_reprint\":1\n" +
                 "}\n";
         String str = "";
-        for(int i = 0; i < openId.length;i++){
+        for (int i = 0; i < openId.length; i++) {
             str += "\"" + openId[i] + "\",";
-            if(i == openId.length -1){
+            if (i == openId.length - 1) {
                 str += "\"" + openId[i] + "\"";
             }
         }
         String result = HttpUtil.post(WeixinUtil.MASS_URL.replace("ACCESS_TOKEN", WeixinUtil.getAccessToken()), mass.replace("OPENID", str).replace("MEDIA_ID", mediaId));
+        System.out.println(result);
+        return null;
+    }
+
+    @RequestMapping("/client_masstext")
+    @ResponseBody
+    public List<String> masstext(@RequestParam(value = "openId[]") String[] openId, String content) {
+        String mass = "{\n" +
+                "   \"touser\":[\n" +
+                "    OPENID   ],\n" +
+                "    \"msgtype\": \"text\",\n" +
+                "\"text\": { \"content\": \"CONTENT\"}\n" +
+                "}\n";
+        String str = "";
+        for (int i = 0; i < openId.length; i++) {
+            str += "\"" + openId[i] + "\",";
+            if (i == openId.length - 1) {
+                str += "\"" + openId[i] + "\"";
+            }
+        }
+        String result = HttpUtil.post(WeixinUtil.MASS_URL.replace("ACCESS_TOKEN", WeixinUtil.getAccessToken()), mass.replace("OPENID", str).replace("CONTENT", content));
         System.out.println(result);
         return null;
     }

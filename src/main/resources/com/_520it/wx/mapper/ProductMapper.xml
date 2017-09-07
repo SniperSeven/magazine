@@ -48,7 +48,7 @@
     <include refid="base_where"/>
     limit #{start},#{rows}
   </select>
-  <select id="getTotalCount" resultType="long">
+  <select id="getTotalCount" resultType="int">
     select count(*)
     from product
     <include refid="base_where"/>

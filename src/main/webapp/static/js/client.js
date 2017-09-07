@@ -35,12 +35,17 @@ $(function () {
     });
 
     $("#mass_dialog").dialog({
-        width: 800,
-        height: 450,
+        width: 300,
+        height: 200,
         closed: true,
         buttons: "#mass_bt"
     });
-    mass_dialog
+    $("#masstext_dialog").dialog({
+        width: 300,
+        height: 200,
+        closed: true,
+        buttons: "#masstext_bt"
+    });
     function staFormatter(value) {
         if (value == 1) {
             return "<font style='color: green'>已关注</font>";
@@ -84,6 +89,30 @@ $(function () {
              */
             //console.log(arr);
         },
+        massTextMessage:function () {
+            $("#masstext_dialog").dialog("open");
+        },
+        tsave:function () {
+            var rows = $("#client_datagrid").datagrid("getSelections");
+            $.messager.confirm("温馨提示:", "确定要群发么?", function (r) {
+                if (r) {
+                    var openId = new Array;
+                    for (i = 0; i < rows.length; i++) {
+                        openId.push(rows[i].openId);
+                    }
+                    $.post('/client_masstext.do', {openId: openId, content: $("#content").val()}, function (data) {
+                        if (data.success) {
+                            $.messager.alert("温馨提示", data.msg, "info");
+                            /* $("#bill_datagrid").datagrid("reload");*/
+                        } else {
+                            $.messager.alert("温馨提示", data.msg, "info");
+                        }
+                    });
+                }
+                $("#masstext_dialog").dialog("close");
+            });
+        },
+
         save: function () {
             var rows = $("#client_datagrid").datagrid("getSelections");
             /*$("#editForm").form("submit", {

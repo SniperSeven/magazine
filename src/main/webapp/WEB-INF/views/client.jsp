@@ -28,6 +28,11 @@
         请输入素材ID:<input id="media_id" type="text" name="media_id">
     </form>
 </div>
+<div id="masstext_dialog">
+    <form action="" method="post" id="teditForm">
+        请输入文本:<input id="content" type="text" name="content">
+    </form>
+</div>
 <table id="client_datagrid"></table>
 <div id="client_tb">
     状态:
@@ -49,6 +54,9 @@
 </div>
 <div id="mass_bt">
     <a class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" data-cmd="save">确认</a>
+</div>
+<div id="masstext_bt">
+    <a class="easyui-linkbutton" data-options="iconCls:'icon-save',plain:true" data-cmd="tsave">确认</a>
 </div>
 </body>
 </html>

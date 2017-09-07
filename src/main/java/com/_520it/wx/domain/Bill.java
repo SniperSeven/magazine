@@ -33,6 +33,8 @@ public class Bill {
 
 	private String comment;
 
+	private String state;
+
 	private List<BillItem> items = new ArrayList<>();
 
 }
