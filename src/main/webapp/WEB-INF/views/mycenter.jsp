@@ -141,7 +141,7 @@ z-index: 97;padding: 0px;margin: 0px;padding-bottom: 4px;padding-top: 4px;max-wi
         <div class="com_top">
             <!--<h2 style="display:none;"><a href="user.php?act=profile">设置</a></h2>-->
             <dl>
-                <dt><img src="/static/image/user68.jpg"> <span>${sessionScope.CLIENT_IN_SESSION.NAME}</span>
+                <dt><img src="/static/image/user68.jpg"> <span>${sessionScope.CLIENT_IN_SESSION.name}</span>
 
                     <span><a href="security.php"
                              style="color:#fff;background: #67b6ba;padding: 1% 5%;border-radius: 6px;">账户管理</a></span>
@@ -424,7 +424,7 @@ z-index: 97;padding: 0px;margin: 0px;padding-bottom: 4px;padding-top: 4px;max-wi
                 href="tel:4006585776">400 800 110</a></div>
         <div class="links" id="ECS_MEMBERZONE">
             <a href="user.php">
-                <span>${sessionScope.CLIENT_IN_SESSION.NAME}
+                <span>${sessionScope.CLIENT_IN_SESSION.name}
                 </span></a>
             <a href="http://www.dijoncake.com/mobile/article.php?id=119" style="color:#132545;">关于我们</a>
         </div>

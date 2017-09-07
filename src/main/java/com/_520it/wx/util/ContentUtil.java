@@ -512,15 +512,15 @@ public class ContentUtil {
             "                       \"value\":\"恭喜你下单成功！\",\n" +
             "                       \"color\":\"#173177\"\n" +
             "                   },\n" +
-            "                   \"keynote1\":{\n" +
+            "                   \"keyword1\":{\n" +
             "                       \"value\":\"NAME\",\n" +
             "                       \"color\":\"#173177\"\n" +
             "                   },\n" +
-            "                   \"keynote2\": {\n" +
+            "                   \"keyword2\": {\n" +
             "                       \"value\":\"TOTALPRICE元\",\n" +
             "                       \"color\":\"#173177\"\n" +
             "                   },\n" +
-            "                   \"keynote3\": {\n" +
+            "                   \"keyword3\": {\n" +
             "                       \"value\":\"NOWDATE\",\n" +
             "                       \"color\":\"#173177\"\n" +
             "                   },\n" +

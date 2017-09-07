@@ -31,7 +31,7 @@ $(function () {
             {field: "digest", title: "摘要", width: 100},
             {field: "show_cover_pic", title: "是否显示封面", width: 100,formatter:staFormatter},
             {field: "content_source_url", title: "阅读原文链接", width: 100},
-            {field: "media_id", title: "素材ID", width: 100}
+            {field: "mediaId", title: "素材ID", width: 100}
         ]],
         toolbar: "#material_tb"
     });

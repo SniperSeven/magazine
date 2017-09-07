@@ -74,7 +74,9 @@ public class WeixinUtil {
     public static void template(String OPENID,String NAME,String TOTALPRICE){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
         String nowdate = sdf.format(new Date());
-        String token = HttpUtil.post(SEND_TEMPLATE_URL.replace("ACCESS_TOKEN", getAccessToken()), ContentUtil.template.replace("OPENID",OPENID).replace("NAME",NAME).replace("TOTALPRICE",TOTALPRICE).replace("NOWDATE",nowdate));
+        String replace = ContentUtil.template.replace("OPENID", OPENID).replace("NAME", NAME).replace("TOTALPRICE", TOTALPRICE).replace("NOWDATE", nowdate);
+        System.out.println(replace);
+        String token = HttpUtil.post(SEND_TEMPLATE_URL.replace("ACCESS_TOKEN", getAccessToken()),replace );
         System.out.println(token);
     }
     public static String getOpenid(String code) {

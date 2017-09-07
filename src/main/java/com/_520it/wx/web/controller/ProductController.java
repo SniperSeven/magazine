@@ -13,7 +13,9 @@ import com._520it.wx.service.IProductService;
 import com._520it.wx.util.AjaxResult;
 import com._520it.wx.util.SecurityUtil;
 import com._520it.wx.util.WeixinUtil;
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.apache.commons.io.IOUtils;
+import org.apache.poi.util.SystemOutLogger;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -232,6 +234,7 @@ public class ProductController extends BaseController {
             } else {
                 //如果有订单--订单里有这个商品
                 List<BillItem> billItems = itemService.selectByBillId(bill.getId());
+                System.out.println(billItems);
                 for (BillItem item : billItems) {
                     if (billItems.size() == 0) {
                         break;
@@ -277,6 +280,7 @@ public class ProductController extends BaseController {
         Client client = (Client) request.getSession().getAttribute("CLIENT_IN_SESSION");
         if (client != null) {
             Bill bill = billService.selectUnsuccessByCLientId(client.getId());
+            System.out.println(bill);
             request.setAttribute("bill", bill);
         }
         return "buy";
@@ -356,6 +360,7 @@ public class ProductController extends BaseController {
         billService.updateByPrimaryKey(bill);
         clientService.updateByPrimaryKey(client);
         request.getSession().setAttribute("CLIENT_IN_SESSION", client);
+
         /*给用户发购买成功信息*/
         List<BillItem> items = bill.getItems();
         StringBuilder productName = new StringBuilder();

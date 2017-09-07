@@ -90,5 +90,10 @@
         <include refid="base_table"/>
         where client_id=#{id} and state='待付款'
     </select>
+    <update id="delivery">
+        update bill
+        set state="已发货"
+        where id=#{id}
+    </update>
 
 </mapper>

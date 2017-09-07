@@ -11,7 +11,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <%@ include file="/static/common/common.jsp" %>
-    <script type="text/javascript" src="/static/js/index.js"></script>
+    <script type="text/javascript" src="/static/js/main.js"></script>
     <style type="text/css">
         .border_right_none {
             border-right: none;

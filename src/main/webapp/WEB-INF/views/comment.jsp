@@ -252,6 +252,7 @@
         $.post("/product_addCart.do", {productId: productId,amount:amount}, function (data) {
             $.messager.alert("温馨提示", data.msg, "info");
         });
+        alert("添加成功");
     }
 </script>
 </html>
