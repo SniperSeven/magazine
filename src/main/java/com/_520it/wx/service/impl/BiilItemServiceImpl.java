@@ -1,5 +1,6 @@
 package com._520it.wx.service.impl;
 
+import com._520it.wx.domain.Bill;
 import com._520it.wx.domain.BillItem;
 import com._520it.wx.mapper.BillItemMapper;
 import com._520it.wx.page.PageResult;
@@ -57,6 +58,5 @@ public class BiilItemServiceImpl implements IBillItemService {
 	public List<BillItem> selectByBillId(Long id) {
 		return mapper.selectByBillId(id);
 	}
-
 
 }
