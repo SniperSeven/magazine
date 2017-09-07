@@ -21,4 +21,8 @@ public interface IProductService {
 	int updateByPrimaryKey(Product record);
 
 	PageResult pageQuery(ProductQueryObject qo);
+
+	int insertHeadProduct(Product record);
+
+	List<Product> getHeadProduct();
 }

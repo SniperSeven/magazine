@@ -39,13 +39,24 @@ $(function () {
         closed: true,
         buttons: "#product_bt"
     });
+    $("#headProduct_dialog").dialog({
+        width: 500,
+        height: 300,
+        closed: true,
+        buttons: "#headProduct_bt"
+    });
 
     var productMethod = {
         add: function () {
-            $("#selfPermissions").datagrid("loadData", {rows: []});
             $("#editForm").form("clear");
             $("#product_dialog").dialog("setTitle", "增加商品");
             $("#product_dialog").dialog("open");
+
+        },
+        addHead: function () {
+            $("#editForm").form("clear");
+            $("#HeadProduct_dialog").dialog("setTitle", "增加主题商品");
+            $("#HeadProduct_dialog").dialog("open");
         },
 
         edit: function () {
@@ -110,9 +121,34 @@ $(function () {
                 }
             });
         },
+        saveHead: function () {
+            var url = "/product_saveHead.do";
+
+            $("#editForm").form("submit", {
+                url: url,
+               /* onSubmit: function (param) {
+                    var rows = $("#selfPermissions").datagrid("getRows");
+                    for (i = 0; i < rows.length; i++) {
+                        param["permissions[" + i + "].id"] = rows[i].id;
+                    }
+                },*/
+                success: function (data) {
+                    data = $.parseJSON(data);
+                    if (data.success) {
+                        $("#product_dialog").dialog("close");
+                        $.messager.alert("温馨提示", data.msg, "info", function () {
+                            $("#product_datagrid").datagrid("reload");
+                        });
+                    } else {
+                        $.messager.alert("温馨提示", data.msg, "info");
+                    }
+                }
+            });
+        },
 
         cancel: function () {
             $("#product_dialog").dialog("close");
+            $("#headProduct_dialog").dialog("close");
         },
 
         reload: function () {

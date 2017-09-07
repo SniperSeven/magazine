@@ -3,7 +3,7 @@
 <mapper namespace="com._520it.wx.mapper.BillItemMapper">
     <resultMap id="BaseResultMap" type="com._520it.wx.domain.BillItem">
         <id column="id" property="id"/>
-        <result column="number" property="number" jdbcType="DECIMAL"/>
+        <result column="number" property="number" jdbcType="INTEGER"/>
         <result column="smallAccount" property="smallAccount" jdbcType="DECIMAL"/>
         <result column="bill_id" property="billId"/>
 
@@ -11,6 +11,9 @@
                      javaType="com._520it.wx.domain.Product" columnPrefix="p_">
             <result column="id" property="id"/>
             <result property="name" column="name"/>
+            <result property="imageURL" column="imageURL"/>
+            <result property="introduce" column="introduce"/>
+            <result property="salePrice" column="salePrice"/>
         </association>
 
     </resultMap>
@@ -21,20 +24,20 @@
     <insert id="insert" parameterType="com._520it.wx.domain.BillItem" useGeneratedKeys="true" keyProperty="id">
     insert into billitem (bill_id, product_id, number, 
       smallAccount)
-    values (#{billId}, #{productId}, #{number,jdbcType=INTEGER}, 
+    values (#{billId}, #{product.id}, #{number,jdbcType=INTEGER}, 
       #{smallAccount,jdbcType=DECIMAL})
   </insert>
     <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.BillItem">
     update billitem
     set bill_id = #{billId},
-      product_id = #{productId},
+      product_id = #{product.id},
       number = #{number,jdbcType=INTEGER},
       smallAccount = #{smallAccount,jdbcType=DECIMAL}
     where id = #{id}
   </update>
     <sql id="base_column">
-      item.id,item.number,item.smallAccount,item.product_id,
-      p.id p_id,p.name p_name
+      item.id,item.number,item.smallAccount,item.product_id,item.bill_id,
+      p.id p_id,p.name p_name,p.imageURL p_imageURL,p.introduce p_introduce,p.salePrice p_salePrice
   </sql>
     <sql id="base_table">
       billitem item
@@ -72,7 +75,7 @@
         <include refid="base_table"/>
         <include refid="base_where"/>
     </select>
-    <select id="selectByBillId" resultType="com._520it.wx.domain.BillItem">
+    <select id="selectByBillId" resultMap="BaseResultMap">
         select
         <include refid="base_column"/>
         from

@@ -24,6 +24,20 @@ public class Product {
 
 	private String secondImg;
 
-	private Double weight;
+	private BigDecimal weight;
+
+	private String detailImg;
+
+	public BigDecimal getWeight() {
+		if (weight != null) {
+			weight.setScale(2);
+		}
+		return weight;
+	}
+
+	public boolean equals(Product product) {
+		return this == null ? (product == null ? true : false) : (product == null ? false : this.id == product.getId());
+	}
+
 
 }

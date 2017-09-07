@@ -30,7 +30,9 @@ $(function () {
             {field: "key", title: "关键字", width: 100},
             {field: "url", title: "链接", width: 100},
             {field: "parent", title: "父级菜单", width: 100,formatter:function (value) {
-                return value.name;
+                if(value){
+                    return value.name;
+                }
             }},
             {field: "media_id", title: "素材码", width: 100},
             {field: "state", title: "状态", width: 100,formatter:function (value) {
@@ -45,8 +47,8 @@ $(function () {
     });
 
     $("#menu_dialog").dialog({
-        width: 500,
-        height: 300,
+        width: 380,
+        height: 400,
         closed: true,
         buttons: "#menu_bt"
     });
@@ -64,33 +66,15 @@ $(function () {
                 $.messager.alert("温馨提示", "请选择要编辑的菜单", "info");
                 return;
             } else {
+                if(row.parent){
+                    row["parent.id"] = row.parent.id;
+                }
+                row.state = row.state + "";
                 $("#editForm").form("clear");
                 $("#editForm").form("load", row);
                /* $("#preview").html('<img src="' + row.headimgpath + '" /> ');*/
                 $("#menu_dialog").dialog("setTitle", "编辑菜单");
                 $("#menu_dialog").dialog("open");
-            }
-        },
-
-        changeState: function () {
-            var row = $("#menu_datagrid").datagrid("getSelected");
-            if (!row.id) {
-                $.messager.alert("温馨提示", "请选择要删除的菜单", "info");
-                return;
-            } else {
-                $.messager.confirm("温馨提示", "确定要删除该菜单吗", function (r) {
-                    if (r) {
-                        $.post("/menu_delete.do", {id: row.id}, function (data) {
-                            if (data.success) {
-                                $.messager.alert("温馨提示", data.msg, "info", function () {
-                                    $("#menu_datagrid").datagrid("reload");
-                                });
-                            } else {
-                                $.messager.alert("温馨提示", data.msg, "info");
-                            }
-                        });
-                    }
-                });
             }
         },
 
@@ -115,6 +99,50 @@ $(function () {
                     }
                 }
             });
+        },
+
+        enable : function () {
+            var row = $("#menu_datagrid").datagrid("getSelected");
+            if (!row.id) {
+                $.messager.alert("温馨提示", "请选择要启用的菜单", "info");
+                return;
+            } else {
+                $.messager.confirm("温馨提示", "确定要启用该菜单吗", function (r) {
+                    if (r) {
+                        $.post("/menu_enable.do", {id: row.id}, function (data) {
+                            if (data.success) {
+                                $.messager.alert("温馨提示", data.msg, "info", function () {
+                                    $("#menu_datagrid").datagrid("reload");
+                                });
+                            } else {
+                                $.messager.alert("温馨提示", data.msg, "info");
+                            }
+                        });
+                    }
+                });
+            }
+        },
+
+        disable: function () {
+            var row = $("#menu_datagrid").datagrid("getSelected");
+            if (!row.id) {
+                $.messager.alert("温馨提示", "请选择要禁用的菜单", "info");
+                return;
+            } else {
+                $.messager.confirm("温馨提示", "确定要禁用该菜单吗", function (r) {
+                    if (r) {
+                        $.post("/menu_disable.do", {id: row.id}, function (data) {
+                            if (data.success) {
+                                $.messager.alert("温馨提示", data.msg, "info", function () {
+                                    $("#menu_datagrid").datagrid("reload");
+                                });
+                            } else {
+                                $.messager.alert("温馨提示", data.msg, "info");
+                            }
+                        });
+                    }
+                });
+            }
         },
 
         createMenu : function () {

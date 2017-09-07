@@ -8,7 +8,7 @@ public class ContentUtil {
             "<html lang=\"en\">\n" +
             "<head>\n" +
             "    <meta charset=\"UTF-8\">\n" +
-            "    <title>今日特价</title>\n" +
+            "    <title></title>\n" +
             "    <style type=\"text/css\">\n" +
             "\n" +
             "        .panel-fit, .panel-fit body {\n" +
@@ -293,10 +293,10 @@ public class ContentUtil {
             "            </div>\n" +
             "        </div>\n" +
             "        <div id=\"meta_content\" class=\"rich_media_meta_list\">\n" +
-            "            <span id=\"copyright_logo\" class=\"rich_media_meta meta_original_tag\">原创</span>\n" +
-            "            <em id=\"post-date\" class=\"rich_media_meta rich_media_meta_text\">2017-09-05</em>\n" +
-            "            <em class=\"rich_media_meta rich_media_meta_text\">中国式浪漫</em>\n" +
-            "            <a id=\"post-user\" class=\"rich_media_meta rich_media_meta_link rich_media_meta_nickname\" href=\"##\">心点芯蛋糕</a>\n" +
+            "            <span id=\"copyright_logo\" class=\"rich_media_meta meta_original_tag\"></span>\n" +
+            "            <em id=\"post-date\" class=\"rich_media_meta rich_media_meta_text\"></em>\n" +
+            "            <em class=\"rich_media_meta rich_media_meta_text\"></em>\n" +
+            "            <a id=\"post-user\" class=\"rich_media_meta rich_media_meta_link rich_media_meta_nickname\" href=\"##\"></a>\n" +
             "        </div>\n" +
             "        <div id=\"js_content\" class=\"rich_media_content \">\n" +
             "            <p>\n" +
@@ -503,4 +503,32 @@ public class ContentUtil {
             "</div>\n" +
             "</body>\n" +
             "</html>";
+
+    public static String template = "{\n" +
+            "           \"touser\":\"OPENID\",\n" +
+            "           \"template_id\":\"MepHJ0c3W2Ek3JTO9S-1Wq8W4kl0e5Gbue6nOeTIb8E\",      \t\t\"url\":\"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx0c5d7a2b65075463&redirect_uri=http://zhou.natapp1.cc/product_index.do&response_type=code&scope=snsapi_base#wechat_redirect\",        \n" +
+            "           \"data\":{\n" +
+            "                   \"first\": {\n" +
+            "                       \"value\":\"恭喜你下单成功！\",\n" +
+            "                       \"color\":\"#173177\"\n" +
+            "                   },\n" +
+            "                   \"keynote1\":{\n" +
+            "                       \"value\":\"NAME\",\n" +
+            "                       \"color\":\"#173177\"\n" +
+            "                   },\n" +
+            "                   \"keynote2\": {\n" +
+            "                       \"value\":\"TOTALPRICE元\",\n" +
+            "                       \"color\":\"#173177\"\n" +
+            "                   },\n" +
+            "                   \"keynote3\": {\n" +
+            "                       \"value\":\"NOWDATE\",\n" +
+            "                       \"color\":\"#173177\"\n" +
+            "                   },\n" +
+            "                   \"remark\":{\n" +
+            "                       \"value\":\"欢迎再次光临！\",\n" +
+            "                       \"color\":\"#173177\"\n" +
+            "                   }\n" +
+            "           }\n" +
+            "       }";
+
 }

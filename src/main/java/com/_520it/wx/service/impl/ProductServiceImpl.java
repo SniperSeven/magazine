@@ -53,5 +53,14 @@ public class ProductServiceImpl implements IProductService {
 		return new PageResult(totalCount, listData);
 	}
 
+	@Override
+	public int insertHeadProduct(Product record) {
 
+		return mapper.insertHeadProduct(record);
+	}
+
+	@Override
+	public List<Product> getHeadProduct() {
+		return mapper.getHeadProduct();
+	}
 }

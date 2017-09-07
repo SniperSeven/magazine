@@ -69,9 +69,9 @@ public class MaterialController extends BaseController {
 			System.out.println(product);
 			String image = request.getSession().getServletContext().getRealPath(product.getImageURL());
 			String secondImg = request.getSession().getServletContext().getRealPath(product.getSecondImg());
-			JSONObject resultJSON = HttpUtil.addMaterialEver(image, "image", WeixinUtil.getAccessToken());
-			JSONObject secondJSON = HttpUtil.addMaterialEver(secondImg, "image", WeixinUtil.getAccessToken());
-			r.setThumb_media_id((String) resultJSON.get("media_id"));
+			JSONObject resultJSON = HttpUtil.addMaterialEver(image, WeixinUtil.getAccessToken());
+			JSONObject secondJSON = HttpUtil.addMaterialEver(secondImg, WeixinUtil.getAccessToken());
+			r.setThumb_media_id("aHnZ8pDnLaUlDRe1ldR4Y5ysCRHvT0nF0UViHCRL-_w");
 			r.setContent(ContentUtil.content.replace("PRODUCTNAME",product.getName()).replace("SALEPRICE",r.getSalePrice().toString()).replace("ORIGINPRICE",product.getSalePrice().toString()).replace("TWOPICTURE",(String) resultJSON.get("url")).replace("ONEPICTURE",(String) secondJSON.get("url")).replace("REDIRECTPICTURE","http://zhou.natapp1.cc/product_index.do"));
 			/*r.setThumb_media_id("aHnZ8pDnLaUlDRe1ldR4Y0I14ajOJUeihfVakj7hZx4");*/
 			List<Material> list = new ArrayList<>();
@@ -79,6 +79,7 @@ public class MaterialController extends BaseController {
 			Map<String,List<Material>> map = new HashMap<>();
 			map.put("articles",list);
 			String result = HttpUtil.post(WeixinUtil.ADD_NEWS_URL.replace("ACCESS_TOKEN", WeixinUtil.getAccessToken()), JSON.toJSONString(map));
+			System.out.println(result);
 			JSONObject jsonObject = JSON.parseObject(result);
 			String  media_id = (String) jsonObject.get("media_id");
 			r.setMediaId(media_id);
@@ -86,10 +87,10 @@ public class MaterialController extends BaseController {
 			menu.setMedia_id(media_id);
 			menuService.createMenu();*/
 			service.insert(r);
-			return new AjaxResult(true, "客户保存成功");
+			return new AjaxResult(true, "素材保存成功");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new AjaxResult(false, "客户保存失败");
+			return new AjaxResult(false, "素材保存失败");
 		}
 	}
 
@@ -105,11 +106,12 @@ public class MaterialController extends BaseController {
 			Menu menu = menuService.selectByName("每日特价");
 			String media_id = menu.getMedia_id();
 			menu.setMedia_id(material.getMediaId());
+			menuService.updateByPrimaryKey(menu);
 			menuService.createMenu();
-			return new AjaxResult(true, "客户删除成功");
+			return new AjaxResult(true, "素材应用成功");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new AjaxResult(false, "客户删除失败");
+			return new AjaxResult(false, "素材应用失败");
 		}
 	}
 
@@ -118,10 +120,10 @@ public class MaterialController extends BaseController {
 	public AjaxResult del(Long id) {
 		try {
 			service.deleteByPrimaryKey(id);
-			return new AjaxResult(true, "客户删除成功");
+			return new AjaxResult(true, "素材删除成功");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new AjaxResult(false, "客户删除失败");
+			return new AjaxResult(false, "素材删除失败");
 		}
 	}
 
@@ -130,10 +132,10 @@ public class MaterialController extends BaseController {
 	public AjaxResult edit(Material material) {
 		try {
 			service.updateByPrimaryKey(material);
-			return new AjaxResult(true, "客户编辑成功");
+			return new AjaxResult(true, "素材编辑成功");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new AjaxResult(false, "客户编辑失败");
+			return new AjaxResult(false, "素材编辑失败");
 		}
 	}
 }

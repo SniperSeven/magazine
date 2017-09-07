@@ -144,6 +144,43 @@ public class HttpUtil {
 	}
 
 
+	/**
+	 * 上传其他永久素材(图片素材的上限为5000，其他类型为1000)
+	 *
+	 * @return
+	 * @throws Exception
+	 */
+	public static JSONObject addMaterialEver(String fileurl, String token) {
+		try {
+			File file = new File(fileurl);
+			//上传素材
+			String path = "https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=" + token;
+			String result = connectHttpsByPost(path, null, file);
+			result = result.replaceAll("[\\\\]", "");
+			System.out.println("result:" + result);
+			JSONObject resultJSON = JSON.parseObject(result);
+			if (resultJSON != null) {
+				if (resultJSON.get("url") != null) {
+					System.out.println("上传永久素材成功");
+					return resultJSON;
+				} else {
+					System.out.println("上传永久素材失败");
+				}
+			}
+			return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (NoSuchProviderException e) {
+			e.printStackTrace();
+		} catch (KeyManagementException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+
 	public static  String connectHttpsByPost(String path, String KK, File file) throws IOException, NoSuchAlgorithmException, NoSuchProviderException, KeyManagementException {
 		URL urlObj = new URL(path);
 		//连接

@@ -31,6 +31,10 @@
                 <td align="right">标题:</td>
                 <td><input type="text" name="title"/></td>
             </tr>
+            <tr>
+                <td align="right">摘要:</td>
+                <td><input type="text" name="digest"/></td>
+            </tr>
             <tr style="height: 10px">
                 <td align="right">产品:</td>
                 <td><input class="easyui-combobox" name="product.id"

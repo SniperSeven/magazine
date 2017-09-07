@@ -53,5 +53,10 @@ public class BiilItemServiceImpl implements IBillItemService {
 		return new PageResult(totalCount, listData);
 	}
 
+	@Override
+	public List<BillItem> selectByBillId(Long id) {
+		return mapper.selectByBillId(id);
+	}
+
 
 }

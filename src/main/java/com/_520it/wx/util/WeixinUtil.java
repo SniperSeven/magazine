@@ -4,6 +4,7 @@ import com._520it.wx.domain.Material;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class WeixinUtil {
@@ -69,18 +70,29 @@ public class WeixinUtil {
         System.out.println(token);
     }
 
-    public static void template(){
-        String token = HttpUtil.post(SEND_TEMPLATE_URL.replace("ACCESS_TOKEN", getAccessToken()), "{\"touser\":\"oP_mZwhWlVaMeveZ_KTt9D2MG97Q\",\"template_id\":\"MepHJ0c3W2Ek3JTO9S-1Wq8W4kl0e5Gbue6nOeTIb8E\",\"url\":\"http://weixin.qq.com/download\",\"data\":{\"first\":{\"value\":\"恭喜你购买成功！\",\"color\":\"#173177\"},\"keyword1\":{\"value\":\"巧克力\",\"color\":\"#173177\"},\"keyword2\":{\"value\":\"39.8元\",\"color\":\"#173177\"},\"keyword3\":{\"value\":\"2014年9月22日\",\"color\":\"#173177\"},\"remark\":{\"value\":\"欢迎再次购买！\",\"color\":\"#173177\"}}}");
+    public static void template(String OPENID,String NAME,String TOTALPRICE){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+        String nowdate = sdf.format(new Date());
+        String token = HttpUtil.post(SEND_TEMPLATE_URL.replace("ACCESS_TOKEN", getAccessToken()), ContentUtil.template.replace("OPENID",OPENID).replace("NAME",NAME).replace("TOTALPRICE",TOTALPRICE).replace("NOWDATE",nowdate));
         System.out.println(token);
+    }
+    public static String getOpenid(String code) {
+        String url = GET_WEB_ACCESSTOKEN_URL.replace("APPID", APPID)
+                .replace("SECRET", APPSECRET)
+                .replace("CODE", code);
+        String result = HttpUtil.get(url);
+        JSONObject jsonObject = JSON.parseObject(result);
+        return (String) jsonObject.get("openid");
     }
 
     public static void main(String[] args){
-       /* String result = HttpUtil.post(GET_SUCAI_URL.replace("ACCESS_TOKEN", getAccessToken()), "{\n" +
+        /*String result = HttpUtil.post(GET_SUCAI_URL.replace("ACCESS_TOKEN", getAccessToken()), "{\n" +
                 "   \"type\":\"image\",\n" +
                 "   \"offset\":1,\n" +
-                "   \"count\":1\n" +
+                "   \"count\":5\n" +
                 "}");
         System.out.println(result);*/
+        JSONObject resultJSON = HttpUtil.addMaterialEver("C:/Users/zmh/Desktop/每日视频和笔/大神班资料/23.微信公众号开发/资料/weixin/src/main/webapp/121.jpg","image", WeixinUtil.getAccessToken());
 
     }
 

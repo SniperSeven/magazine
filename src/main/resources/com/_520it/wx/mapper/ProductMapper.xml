@@ -1,27 +1,30 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com._520it.wx.mapper.ProductMapper" >
-  <resultMap id="BaseResultMap" type="com._520it.wx.domain.Product" >
-    <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="salePrice" property="salePrice" jdbcType="DECIMAL" />
-    <result column="costPrice" property="costPrice" jdbcType="DECIMAL" />
-    <result column="imageURL" property="imageURL" jdbcType="VARCHAR" />
-    <result column="introduce" property="introduce" jdbcType="VARCHAR" />
-    <result column="secondImg" property="secondImg" jdbcType="VARCHAR" />
-    <result column="weight" property="weight" />
-  </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+<mapper namespace="com._520it.wx.mapper.ProductMapper">
+    <resultMap id="BaseResultMap" type="com._520it.wx.domain.Product">
+        <id column="id" property="id"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="salePrice" property="salePrice" jdbcType="DECIMAL"/>
+        <result column="costPrice" property="costPrice" jdbcType="DECIMAL"/>
+        <result column="imageURL" property="imageURL" jdbcType="VARCHAR"/>
+        <result column="introduce" property="introduce" jdbcType="VARCHAR"/>
+        <result column="secondImg" property="secondImg" jdbcType="VARCHAR"/>
+        <result column="detailImg" property="detailImg" />
+        <result column="weight" property="weight"/>
+    </resultMap>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from product
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com._520it.wx.domain.Product" useGeneratedKeys="true" keyProperty="id" >
+    <insert id="insert" parameterType="com._520it.wx.domain.Product" useGeneratedKeys="true" keyProperty="id">
     insert into product (name, salePrice, costPrice, secondImg,weight,
-      imageURL, introduce)
+      imageURL, introduce,inHead)
     values (#{name}, #{salePrice,jdbcType=DECIMAL}, #{costPrice,jdbcType=DECIMAL}, 
-      #{imageURL}, #{introduce})
+      #{secondImg}, #{weight}, #{imageURL}, #{introduce},0)
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.Product" >
+
+
+    <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.Product">
     update product
     set name = #{name},
       salePrice = #{salePrice,jdbcType=DECIMAL},
@@ -29,32 +32,47 @@
       imageURL = #{imageURL},
       introduce = #{introduce},
       secondImg = #{secondImg},
+      inHead = #{inHead},
+      detailImg = #{detailImg},
       weight = #{weight}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
-    select id, name, salePrice, costPrice, imageURL, introduce,secondImg,weight
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select id, name, salePrice, costPrice, imageURL, introduce,secondImg,weight,inHead,detailImg
     from product
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap" >
-    select id, name, salePrice, costPrice, imageURL, introduce,secondImg,weight
+    <select id="selectAll" resultMap="BaseResultMap">
+    select id, name, salePrice, costPrice, imageURL, introduce,secondImg,weight,inHead,detailImg
     from product
   </select>
 
-  <select id="getDataList" resultMap="BaseResultMap" >
-    select id, name, salePrice, costPrice, imageURL, introduce,secondImg,weight
-    from product
-    <include refid="base_where"/>
-    limit #{start},#{rows}
-  </select>
-  <select id="getTotalCount" resultType="long">
-    select count(*)
-    from product
-    <include refid="base_where"/>
-  </select>
-  <sql id="base_where">
+    <select id="getDataList" resultMap="BaseResultMap">
+        select id, name, salePrice, costPrice, imageURL, introduce,secondImg,weight,inHead,detailImg
+        from product
+        <include refid="base_where"/>
+        limit #{start},#{rows}
+    </select>
+    <select id="getTotalCount" resultType="int">
+        select count(*)
+        from product
+        <include refid="base_where"/>
+    </select>
+    <sql id="base_where">
 
-  </sql>
+    </sql>
+
+    <insert id="insertHeadProduct" parameterType="com._520it.wx.domain.Product" useGeneratedKeys="true"
+            keyProperty="id">
+    insert into product (name, salePrice, costPrice, secondImg,weight,
+      imageURL, introduce,inHead,detailImg)
+    values (#{name}, #{salePrice,jdbcType=DECIMAL}, #{costPrice,jdbcType=DECIMAL},
+      #{secondImg}, #{weight}, #{imageURL}, #{introduce},1,#{detailImg})
+  </insert>
+    <select id="getHeadProduct" resultMap="BaseResultMap">
+     select id, name, salePrice, costPrice, imageURL, introduce,secondImg,weight,inHead,detailImg,inHead
+    from product
+    where inHead = 1
+    </select>
 
 </mapper>

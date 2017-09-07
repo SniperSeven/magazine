@@ -19,4 +19,8 @@ public interface ProductMapper {
 	List<Product> getDataList(ProductQueryObject qo);
 
 	int getTotalCount(ProductQueryObject qo);
+
+	int insertHeadProduct(Product record);
+
+	List<Product> getHeadProduct();
 }

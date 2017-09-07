@@ -21,4 +21,6 @@ public interface BillMapper {
     List<Bill> getDataList(BillQueryObject qo);
 
     int getTotalCount(BillQueryObject qo);
+
+    Bill selectUnsuccessByCLientId(Long id);
 }

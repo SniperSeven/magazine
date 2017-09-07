@@ -25,11 +25,11 @@
 
 
   <select id="getbuttons" resultMap="BaseResultMap">
-    select * from menu where parent_id is null
+    select * from menu where parent_id is null and state = 1
   </select>
 
   <select id="getsubbuttons" resultType="com._520it.wx.domain.Menu">
-    select * from menu where parent_id = #{id}
+    select * from menu where parent_id = #{id} and state = 1
   </select>
 
 
@@ -53,8 +53,8 @@
       type = #{type,jdbcType=VARCHAR},
       key = #{key,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
-      parent_id = #{parentId,jdbcType=BIGINT},
-      media_id = #{mediaId,jdbcType=VARCHAR}
+      parent_id = #{parent.id,jdbcType=BIGINT},
+      media_id = #{media_id,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
@@ -69,19 +69,19 @@
   </update>
 
   <select id="selectByPrimaryKey" resultType="com._520it.wx.domain.Menu" parameterType="java.lang.Long" >
-    select id, name, type, key, url, parent_id, media_id, state
+    select *
     from menu
     where id = #{id,jdbcType=BIGINT}
   </select>
 
   <select id="selectByName" resultType="com._520it.wx.domain.Menu" >
-    select id, name, type, key, url, parent_id, media_id, state
+    select *
     from menu
     where name = #{name}
   </select>
 
   <select id="selectAll" resultMap="ResultMap">
-    select id, name, type, key, url, parent_id, media_id,state
+    select *
     from menu
   </select>
 

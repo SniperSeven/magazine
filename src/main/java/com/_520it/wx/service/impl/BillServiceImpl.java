@@ -91,5 +91,9 @@ public class BillServiceImpl implements IBillService {
 		return new PageResult(totalCount, listData);
 	}
 
+	@Override
+	public Bill selectUnsuccessByCLientId(Long id) {
+		return mapper.selectUnsuccessByCLientId(id);
+	}
 
 }

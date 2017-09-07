@@ -83,7 +83,7 @@ public class MenuServiceImpl implements IMenuService {
         List<Menu> menus = mapper.getbuttons();
         Map<String,List<Menu>> map = new HashMap<>();
         map.put("button",menus);
-        //System.out.println(JSON.toJSONString(map));
+        System.out.println(JSON.toJSONString(map));
         WeixinUtil.createMenu(JSON.toJSONString(map));
     }
 

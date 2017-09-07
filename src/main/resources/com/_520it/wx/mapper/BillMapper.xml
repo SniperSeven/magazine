@@ -8,7 +8,7 @@
         <result column="costPrice" property="costPrice" jdbcType="DECIMAL"/>
         <result column="totalPrice" property="totalPrice" jdbcType="DECIMAL"/>
         <result column="totalNumber" property="totalNumber"/>
-        <result column="comment" property="comment"/>
+        <result column="state" property="state"/>
         <association column="client_id" property="client"
                      javaType="com._520it.wx.domain.Client" columnPrefix="c_">
             <result property="id" column="id"/>
@@ -25,10 +25,10 @@
   </delete>
     <insert id="insert" parameterType="com._520it.wx.domain.Bill" useGeneratedKeys="true" keyProperty="id">
     insert into bill (sn, saleDate, costPrice, 
-      totalPrice, totalNumber,comment, client_id
+      totalPrice, totalNumber, client_id,state
       )
     values (#{sn,jdbcType=VARCHAR}, #{saleDate,jdbcType=DATE}, #{costPrice}, 
-      #{totalPrice}, #{totalNumber},#{comment}, #{client.id,jdbcType=BIGINT}
+      #{totalPrice}, #{totalNumber}, #{client.id,jdbcType=BIGINT},#{state}
       )
   </insert>
     <update id="updateByPrimaryKey" parameterType="com._520it.wx.domain.Bill">
@@ -38,14 +38,14 @@
       costPrice = #{costPrice},
       totalPrice = #{totalPrice},
       totalNumber = #{totalNumber},
-      comment = #{comment},
+      state = #{state},
       client_id = #{client.id,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 
     <sql id="base_column">
        bill.id, bill.saleDate,bill.costPrice,bill.totalPrice, bill.sn,bill.totalNumber,
-       c.id c_id, c.name c_name, c.openId c_openId
+       c.id c_id, c.name c_name, c.openId c_openId,state
   </sql>
     <sql id="base_table">
        bill 
@@ -82,6 +82,13 @@
         from
         <include refid="base_table"/>
         <include refid="base_where"/>
+    </select>
+    <select id="selectUnsuccessByCLientId" resultMap="BaseResultMap">
+        select
+        <include refid="base_column"/>
+        from
+        <include refid="base_table"/>
+        where client_id=#{id} and state='待付款'
     </select>
 
 </mapper>

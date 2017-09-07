@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Bootstrap core CSS -->
+    <link href="../dasssss/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../dasssss/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <link href="../dasssss/assets/css/style.css" rel="stylesheet">
+
+    <style type="text/css">
+        *{ padding:0; margin:0; list-style:none; border:0;}
+        .all{ width: 650px; height: 400px; padding: 7px; position: relative; }
+        .screen{
+            width:650px;
+            height:400px;
+            overflow:hidden;
+            position:relative;
+        }
+        .screen li{ width:650px; height:400px; overflow:hidden; float:left;}
+        .screen ul{ position:absolute; left:0; top:0px; width:5000px;}
+        .all ol{ position:absolute; right:10px; bottom:10px; line-height:20px; text-align:center;}
+        .all ol li{ float: left; width: 15px; height: 10px; background: #fff;  margin-left: 5px;
+            cursor: pointer; font-size: 0px; font-family: Verdana; line-height: 15px; border-radius: 15px; }
+        .all ol li.current{ background:#2bb4e8;}
+    </style>
+
+    <script type="text/javascript" src=""></script>
+</head>
+
+<body>
+<!--main content start-->
+
+    <p style="height: 20px"></p>
+        <div class="all" id='all' style="left: 14px;top:-10px;">
+            <div class="screen">
+                <ul>
+                    <li onclick="par('/dasssss/system.html');"><a href="#"><img src="/images/1.jpg" width="670" height="400" /></a></li>
+                    <li><a href="#"><img src="/images/2.jpg" width="650" height="400" /></a></li>
+                    <li><a href="#"><img src="/images/3.jpg" width="650" height="400" /></a></li>
+                    <li><a href="#"><img src="/images/4.jpg" width="650" height="400" /></a></li>
+                    <li><a href="#"><img src="/images/5.jpg" width="650" height="400" /></a></li>
+                </ul>
+            </div>
+            <ol>
+            </ol>
+            <div>
+                <li><img src="/images/0.png" width="650" height="250" /></li>
+            </div>
+        </div>
+</body>
+</html>
