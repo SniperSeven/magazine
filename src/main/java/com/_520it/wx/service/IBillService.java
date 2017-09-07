@@ -24,4 +24,6 @@ public interface IBillService {
 	PageResult pageQuery(BillQueryObject qo);
 
 	int delivery(Long id);
+
+	Bill selectUnsuccessByCLientId(Long id);
 }

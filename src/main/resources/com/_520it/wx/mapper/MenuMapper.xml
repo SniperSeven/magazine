@@ -51,7 +51,6 @@
     update menu
     set name = #{name,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR},
-      key = #{key,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
       parent_id = #{parent.id,jdbcType=BIGINT},
       media_id = #{media_id,jdbcType=VARCHAR}
