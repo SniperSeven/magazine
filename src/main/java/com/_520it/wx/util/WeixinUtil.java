@@ -37,6 +37,7 @@ public class WeixinUtil {
 
     public static final String GET_SUCAI_URL = "https://api.weixin.qq.com/cgi-bin/material/batchget_material?access_token=ACCESS_TOKEN";
 
+    public static final String MASS_URL = "https://api.weixin.qq.com/cgi-bin/message/mass/send?access_token=ACCESS_TOKEN";
 
     public static String getAccessToken(){
         if(new Date().getTime() > expiresTime){
@@ -73,6 +74,33 @@ public class WeixinUtil {
         String token = HttpUtil.post(SEND_TEMPLATE_URL.replace("ACCESS_TOKEN", getAccessToken()), "{\"touser\":\"oP_mZwhWlVaMeveZ_KTt9D2MG97Q\",\"template_id\":\"MepHJ0c3W2Ek3JTO9S-1Wq8W4kl0e5Gbue6nOeTIb8E\",\"url\":\"http://weixin.qq.com/download\",\"data\":{\"first\":{\"value\":\"恭喜你购买成功！\",\"color\":\"#173177\"},\"keyword1\":{\"value\":\"巧克力\",\"color\":\"#173177\"},\"keyword2\":{\"value\":\"39.8元\",\"color\":\"#173177\"},\"keyword3\":{\"value\":\"2014年9月22日\",\"color\":\"#173177\"},\"remark\":{\"value\":\"欢迎再次购买！\",\"color\":\"#173177\"}}}");
         System.out.println(token);
     }
+
+    public static void mass(){
+        HttpUtil.post(MASS_URL.replace("ACCESS_TOKEN",getAccessToken()),"{\"touser\":[\"OPENID1\",\"OPENID2\"],\"mpnews\":{\"media_id\":\"123dsdajkasd231jhksad\"},\"msgtype\":\"mpnews\",\"send_ignore_reprint\":0}");
+    }
+
+   /* public static void messagePrivate(String accesstoken, String touser, List<WxArticle> wxArticles) throws WexinReqException {
+
+        if (accesstoken != null) {
+            String requestUrl = message_preview_url.replace("ACCESS_TOKEN", accesstoken);
+            try {
+                String mediaId = getMediaId(accesstoken, wxArticles);
+                JSONObject obj = new JSONObject();
+                JSONObject mpnews = new JSONObject();
+                obj.put("touser", touser);
+                obj.put("msgtype", "mpnews");
+                mpnews.put("media_id", mediaId);
+                obj.put("mpnews", mpnews);
+                JSONObject result = WxstoreUtils.httpRequest(requestUrl, "POST", obj.toString());
+                //System.out.println("微信返回的结果：" + result.toString());
+            } catch (Exception e) {
+
+                throw new WexinReqException(e);
+            }
+        } else {
+            throw new WexinReqException("accesstoken 为空，请检查！");
+        }
+    }*/
 
     public static void main(String[] args){
        /* String result = HttpUtil.post(GET_SUCAI_URL.replace("ACCESS_TOKEN", getAccessToken()), "{\n" +
