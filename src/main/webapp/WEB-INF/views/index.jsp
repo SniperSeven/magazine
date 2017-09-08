@@ -460,13 +460,13 @@
                         <img height="15px" src="/static/image/shoppingCart.png">
                     </a>
                 </span>
-                <div class="a_money">
+
+                </div> <div class="a_money">
                     <span class="text_4">
                         <font class="shop" style="color: #666;">￥${product.salePrice}</font>
                         <font class="market" style="color: #666;font-size: 12px;">/ ${product.weight} 磅 </font>
                     <br>
                     </span>
-                </div>
                 <span class="bug_car" onclick="addToCart()"> </span>
             </div>
         </div>
